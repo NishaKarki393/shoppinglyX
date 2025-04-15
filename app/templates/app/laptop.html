@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Laptops{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <!-- Sidebar with filters -->
+    <div class="col-sm-3">
+      <h4 class="mb-3">Filter by Brand</h4>
+      <div class="list-group">
+        <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action">All Laptops</a>
+        <a href="{% url 'laptopdata' 'HP' %}" class="list-group-item list-group-item-action">HP</a>
+        <a href="{% url 'laptopdata' 'Dell' %}" class="list-group-item list-group-item-action">Dell</a>
+        <a href="{% url 'laptopdata' 'Lenovo' %}" class="list-group-item list-group-item-action">Lenovo</a>
+      </div>
+    </div>
+
+    <!-- Laptop Products Grid -->
+    <div class="col-sm-9">
+      <h3 class="mb-4">Laptops</h3>
+      <div class="row">
+        {% for product in laptops %}
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="card shadow-sm">
+            <a href="{% url 'product-detail' product.id %}" class="text-decoration-none text-dark">
+              <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" height="250">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">
+                  <strong>Rs. {{ product.discounted_price }}</strong>
+                  <small class="text-muted text-decoration-line-through">Rs. {{ product.selling_price }}</small>
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No laptops available.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
