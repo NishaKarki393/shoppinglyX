@@ -129,3 +129,8 @@ MEDIA_ROOT=BASE_DIR / 'media'
 LOGIN_REDIRECT_URL='/profile/'
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 SESSION_ENGINE='django.contrib.sessions.backends.db'
+
+
+import os
+STATIC_ROOT=os.path.join(BASE_DIR,'static/')
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
